@@ -1,0 +1,196 @@
+<div class="container mt-5 d-flex justify-content-center">
+  <!-- Register Form Card -->
+  <div class="card form-card p-4 shadow-lg">
+    <h2 class="card-title text-center mb-4">Admin Service</h2>
+
+    <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+      
+      <div class="form-grid">
+
+        <!-- Admin Name -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Admin Name</label>
+          <input type="text" class="form-control" required name="adminName"
+            [(ngModel)]="adminToUpdate.adminName" />
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Email</label>
+          <input type="email" class="form-control" required name="email"
+            [(ngModel)]="adminToUpdate.email" />
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Password</label>
+          <input type="password" class="form-control" required name="password"
+            [(ngModel)]="adminToUpdate.password" />
+        </div>
+
+        <!-- Phone Number -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Phone Number</label>
+          <input type="text" class="form-control" required name="phoneNumber"
+            [(ngModel)]="adminToUpdate.phoneNumber" />
+        </div>
+
+        <!-- Mall Name -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Mall Name</label>
+          <input type="text" class="form-control" required name="mallName"
+            [(ngModel)]="adminToUpdate.mallName" />
+        </div>
+
+        <!-- Mall Location -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Mall Location</label>
+          <input type="text" class="form-control" required name="mallLocation"
+            [(ngModel)]="adminToUpdate.mallLocation" />
+        </div>
+
+        <!-- Total Shops -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Total Shops</label>
+          <input type="number" class="form-control" required name="totalShops"
+            [(ngModel)]="adminToUpdate.totalShops" />
+        </div>
+
+        <!-- Role -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Role</label>
+          <input type="text" class="form-control" required name="role"
+            [(ngModel)]="adminToUpdate.role" />
+        </div>
+
+        <!-- Address -->
+        <div class="mb-3 address-field">
+          <label class="form-label fw-bold">Address</label>
+          <input type="text" class="form-control" required name="address"
+            [(ngModel)]="adminToUpdate.address" />
+        </div>
+
+      </div>
+
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary btn-lg w-100 create-btn" 
+          [disabled]="registerForm.invalid">
+          Register Admin
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<hr class="my-5" />
+
+<!-- Admin List Table -->
+<div class="table-responsive mt-4">
+  <table class="table table-hover align-middle text-center custom-table">
+    <thead class="table-header">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Mall</th>
+        <th>Location</th>
+        <th>Shops</th>
+        <th>Address</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let admin of adminDetails">
+        <td>{{ admin.adminId }}</td>
+        <td>{{ admin.adminName }}</td>
+        <td>{{ admin.email }}</td>
+        <td>{{ admin.phoneNumber }}</td>
+        <td>{{ admin.mallName }}</td>
+        <td>{{ admin.mallLocation }}</td>
+        <td>{{ admin.totalShops }}</td>
+        <td>{{ admin.address }}</td>
+        <td>{{ admin.role }}</td>
+
+        <td>
+          <button class="btn btn-warning btn-sm me-2" (click)="edit(admin)">
+            Edit
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="deleteAdmin(admin)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Update Admin Modal -->
+<div *ngIf="adminToUpdate.adminId" class="update-overlay">
+  <div class="update-card shadow-lg rounded">
+
+    <h2 class="mb-4 text-center">Update Admin</h2>
+
+    <form (ngSubmit)="updateAdmin()">
+      <div class="form-grid">
+
+        <div>
+          <label class="form-label">Admin Name</label>
+          <input type="text" class="form-control" required [(ngModel)]="adminToUpdate.adminName" name="adminName" />
+        </div>
+
+        <div>
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" required [(ngModel)]="adminToUpdate.email" name="email" />
+        </div>
+
+        <div>
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" required [(ngModel)]="adminToUpdate.password" name="password" />
+        </div>
+
+        <div>
+          <label class="form-label">Phone Number</label>
+          <input type="text" class="form-control" required [(ngModel)]="adminToUpdate.phoneNumber" name="phoneNumber" />
+        </div>
+
+        <div>
+          <label class="form-label">Mall Name</label>
+          <input type="text" class="form-control" required [(ngModel)]="adminToUpdate.mallName" name="mallName" />
+        </div>
+
+        <div>
+          <label class="form-label">Mall Location</label>
+          <input type="text" class="form-control" required [(ngModel)]="adminToUpdate.mallLocation" name="mallLocation" />
+        </div>
+
+        <div>
+          <label class="form-label">Total Shops</label>
+          <input type="number" class="form-control" required [(ngModel)]="adminToUpdate.totalShops" name="totalShops" />
+        </div>
+
+        <div>
+          <label class="form-label">Role</label>
+          <input type="text" class="form-control" required [(ngModel)]="adminToUpdate.role" name="role" />
+        </div>
+
+        <div class="address-field">
+          <label class="form-label">Address</label>
+          <input type="text" class="form-control" required [(ngModel)]="adminToUpdate.address" name="address" />
+        </div>
+
+      </div>
+
+      <div class="d-flex justify-content-center gap-2 mt-4">
+        <button type="submit" class="btn btn-success w-25">Update</button>
+        <button type="button" class="btn btn-secondary w-25"
+          (click)="adminToUpdate = { adminId: null, adminName: '', email: '', password: '', phoneNumber: '', mallName: '', mallLocation: '', totalShops: 0, address: '', role: '' }">
+          Cancel
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
